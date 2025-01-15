@@ -22,9 +22,8 @@ public class SalvarArquivoImpl implements SalvarArquivo {
       FileUtils.copyInputStreamToFile(arquivo, new File(String.format("%s/%s/%s.mp4", defaultPath, idUsuario, idVideo)));
       return idVideo;
     } catch (Exception e) {
-      return null;
+      throw new SalvarArquivoException(e.getMessage());
     }
-    
   }
 
 }
