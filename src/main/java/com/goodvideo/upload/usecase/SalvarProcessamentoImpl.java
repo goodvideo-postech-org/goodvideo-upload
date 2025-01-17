@@ -13,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SalvarProcessamentoImpl implements SalvarProcessamento {
 
-  @Value("${upload.default-path}")
-  private String defaultPath;
   
   private final ProcessamentoDatabaseGateway processamentoDatabaseGateway;
   
@@ -25,7 +23,7 @@ public class SalvarProcessamentoImpl implements SalvarProcessamento {
     processamento.setStatus(Status.PROCESSANDO);
     processamento.setIdUsuario(processamentoRequisicao.getIdUsuario());
     processamento.setEmail(processamentoRequisicao.getEmail());
-    processamento.setDiretorio(String.format("%s/%s/%s.mp4", defaultPath, processamentoRequisicao.getIdUsuario(), idVideo));
+    processamento.setDiretorio(String.format("%s/%s.mp4", processamentoRequisicao.getIdUsuario(), idVideo));
     processamento.setDataCriacao(LocalDateTime.now());
     return processamentoDatabaseGateway.salvar(processamento);
   }

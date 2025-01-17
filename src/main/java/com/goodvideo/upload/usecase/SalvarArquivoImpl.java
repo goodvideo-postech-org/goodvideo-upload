@@ -1,29 +1,52 @@
 package com.goodvideo.upload.usecase;
 
 import java.io.File;
-import java.io.InputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.UUID;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
+import com.goodvideo.upload.config.cloud.AWSClientConfig;
 import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
 public class SalvarArquivoImpl implements SalvarArquivo {
 
-  @Value("${upload.default-path}")
-  private String defaultPath;
+  private final AmazonS3 amazonS3;
+  
+  @Value("aws.bucketName")
+  private String bucketName;
+  
   
   @Override
-  public String executar(final InputStream arquivo, final String idUsuario) {
+  public String executar(final MultipartFile arquivo, final String idUsuario) {
     try {
       final String idVideo = UUID.randomUUID().toString();
-      FileUtils.copyInputStreamToFile(arquivo, new File(String.format("%s/%s/%s.mp4", defaultPath, idUsuario, idVideo)));
+      File localFile = convertMultipartFileToFile(arquivo);
+      
+      amazonS3.putObject(new PutObjectRequest(bucketName, String.format("%s/%s/%s", idUsuario, idVideo, arquivo.getOriginalFilename()), localFile));
+      
       return idVideo;
+      
     } catch (Exception e) {
-      throw new SalvarArquivoException(e.getMessage());
+      throw new SalvarArquivoException("Falha ao converter arquivo");
     }
   }
+  
+  private File convertMultipartFileToFile(MultipartFile file) {
+    File convertedFile = new File(file.getOriginalFilename());
+    try {
+        Files.copy(file.getInputStream(), convertedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+    return convertedFile;
+}
 
 }

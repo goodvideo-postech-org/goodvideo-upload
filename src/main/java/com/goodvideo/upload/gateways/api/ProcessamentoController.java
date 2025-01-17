@@ -28,7 +28,7 @@ public class ProcessamentoController {
       @RequestPart("file") MultipartFile file) throws IOException {
     return ResponseEntity.ok(
           processamentoVideo.execute(auth, ProcessamentoRequisicao.builder()
-                .video(file.getInputStream())
+                .video(file)
                 .fileName(file.getOriginalFilename())
                 .email("bridi@bridi.com")
                 .idUsuario(UUID.randomUUID().toString())

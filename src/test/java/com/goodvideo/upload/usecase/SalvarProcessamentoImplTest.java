@@ -3,6 +3,7 @@ package com.goodvideo.upload.usecase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.util.ReflectionTestUtils;
 import com.goodvideo.upload.domains.Processamento;
 import com.goodvideo.upload.domains.ProcessamentoRequisicao;
@@ -31,18 +33,19 @@ public class SalvarProcessamentoImplTest {
   private ArgumentCaptor<Processamento> processamentoCapture;
   
   @Test
-  public void deveSalvarProcessamento() {
+  public void deveSalvarProcessamento() throws IOException {
 
-    ReflectionTestUtils.setField(provider, "defaultPath", "/usr/share");
     
-    final InputStream resourceAsStream = this.getClass().getResourceAsStream("/sample.txt");
+    MockMultipartFile firstFile = new MockMultipartFile("data", "filename.txt", "text/plain",
+        this.getClass().getResourceAsStream("/sample.txt"));
+    
     final String uuidUsuario = UUID.randomUUID().toString();
     final String emailUsuario = "bridi@gmail.com";
     
-    final ProcessamentoRequisicao p = new ProcessamentoRequisicao(resourceAsStream, "sample.txt", uuidUsuario, emailUsuario);
+    final ProcessamentoRequisicao p = new ProcessamentoRequisicao(firstFile, "sample.txt", uuidUsuario, emailUsuario);
     final String idVideo = UUID.randomUUID().toString();
     final Processamento executar = provider.executar(idVideo, p);
-    final String diretorio = String.format("%s/%s/%s.mp4", "/usr/share", uuidUsuario, idVideo);
+    final String diretorio = String.format("%s/%s.mp4", uuidUsuario, idVideo);
     
     verify(processamentoDatabaseGateway).salvar(processamentoCapture.capture());
     

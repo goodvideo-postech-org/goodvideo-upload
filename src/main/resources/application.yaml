@@ -6,6 +6,10 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui-custom.html
+aws:
+  accessKey: ${ACCESS_KEY}
+  secretAccessKey: ${SECRET_ACCESS_KEY}
+  bucketName: ${BUCKET_NAME}
 spring:
   datasource:
     username: ${DATABASE_USERNAME:postgres}
@@ -38,7 +42,3 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    
-  
-upload:
-  defaultPath: ${DEFAULT_PATH:/home/bridi/Documents}
