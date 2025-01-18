@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: goodvideo-upload
-        image: bridicarlos/goodvideo-upload:1.1
+        image: bridicarlos/goodvideo-upload:1.2.7
         ports:
         - containerPort: 80
         resources:
@@ -24,6 +24,8 @@ spec:
           limits:
             cpu: "500m" 
         env:
+        - name: MAX_FILE_SIZE
+          value: "10"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -35,7 +37,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: DATABASE_USER
+              key: DATABASE_USERNAME
         - name: DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -50,12 +52,6 @@ spec:
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: SECRET_DATABASE_PASSWORD
+              key: SECRET_ACCESS_KEY
         - name: BUCKET_NAME
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: BUCKET_NAME
-        - name: MAX_FILE_SIZE
-          value: 10
-
+          value: goodvideo-videos-upload

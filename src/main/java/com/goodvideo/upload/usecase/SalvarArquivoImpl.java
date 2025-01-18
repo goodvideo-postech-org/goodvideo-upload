@@ -19,34 +19,36 @@ import lombok.RequiredArgsConstructor;
 public class SalvarArquivoImpl implements SalvarArquivo {
 
   private final AmazonS3 amazonS3;
-  
-  @Value("aws.bucketName")
+
+  @Value("${aws.bucket}")
   private String bucketName;
-  
-  
+
   @Override
   public String executar(final MultipartFile arquivo, final String idUsuario) {
     try {
       final String idVideo = UUID.randomUUID().toString();
       File localFile = convertMultipartFileToFile(arquivo);
-      
-      amazonS3.putObject(new PutObjectRequest(bucketName, String.format("%s/%s/%s", idUsuario, idVideo, arquivo.getOriginalFilename()), localFile));
-      
+
+      amazonS3.putObject(new PutObjectRequest(bucketName,
+          String.format("%s/%s/%s", idUsuario, idVideo, arquivo.getOriginalFilename()), localFile));
+
       return idVideo;
-      
+
     } catch (Exception e) {
-      throw new SalvarArquivoException("Falha ao converter arquivo");
+      throw new SalvarArquivoException(
+          String.format("Falha ao converter arquivo, %s", e.getMessage()));
     }
   }
-  
+
   private File convertMultipartFileToFile(MultipartFile file) {
     File convertedFile = new File(file.getOriginalFilename());
     try {
-        Files.copy(file.getInputStream(), convertedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+      Files.copy(file.getInputStream(), convertedFile.toPath(),
+          StandardCopyOption.REPLACE_EXISTING);
     } catch (IOException e) {
-        throw new RuntimeException(e);
+      throw new RuntimeException(e);
     }
     return convertedFile;
-}
+  }
 
 }

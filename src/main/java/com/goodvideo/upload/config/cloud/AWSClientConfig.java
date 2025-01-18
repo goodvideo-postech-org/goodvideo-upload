@@ -13,25 +13,23 @@ import lombok.Getter;
 @Getter
 public class AWSClientConfig {
 
-  @Value("${aws.accessKey}")
+  @Value("${aws.access}")
   private String accessKey;
 
-  @Value("${aws.secretAccessKey}")
+  @Value("${aws.secret}")
   private String secretAccessKey;
 
-  @Value("${aws.bucketName}")
+  @Value("${aws.bucket}")
   private String bucketName;
 
   @Bean
   public AmazonS3 amazonS3() {
-      BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretAccessKey);
-
-      return AmazonS3ClientBuilder
-              .standard()
-              .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
-              .withRegion("us-east-1")
-              .build();
+    final BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretAccessKey);
+    return AmazonS3ClientBuilder.standard()
+        .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
+        .withRegion("us-east-1")
+        .build();
   }
 
-  
+
 }

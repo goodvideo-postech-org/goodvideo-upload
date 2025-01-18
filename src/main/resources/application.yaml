@@ -7,9 +7,9 @@ springdoc:
   swagger-ui:
     path: /swagger-ui-custom.html
 aws:
-  accessKey: ${ACCESS_KEY:123}
-  secretAccessKey: ${SECRET_ACCESS_KEY:456}
-  bucketName: ${BUCKET_NAME:fdsadas}
+  access: ${ACCESS_KEY}
+  secret: ${SECRET_ACCESS_KEY}
+  bucket: ${BUCKET_NAME}
 upload:
   maxFileSizeMb: ${MAX_FILE_SIZE:1}  
 spring:
@@ -35,7 +35,7 @@ spring:
     validateMigrationNaming: false
     locations: classpath:db/migration
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka-service:9092}
     consumer:
       group-id: my-consumer-group
       auto-offset-reset: earliest
