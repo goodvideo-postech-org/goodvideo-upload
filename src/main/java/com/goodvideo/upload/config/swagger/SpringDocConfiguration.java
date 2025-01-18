@@ -12,8 +12,8 @@ import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 
-@OpenAPIDefinition
-@Configuration
+//@OpenAPIDefinition
+//@Configuration
 @Profile("!test")
 public class SpringDocConfiguration {
 
@@ -26,7 +26,7 @@ public class SpringDocConfiguration {
   @Value("${info.build.version:}")
   private String applicationVersion;
 
-  @Bean
+//  @Bean
   public OpenAPI openAPI() {
     return new OpenAPI()
         .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))

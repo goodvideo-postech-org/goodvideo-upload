@@ -14,12 +14,15 @@ public class ProcessamentoVideoImpl implements ProcessamentoVideo {
   private final SalvarArquivo salvarArquivo;
   private final EnviarParaProcessamento enviarParaProcessamento;
   private final ValidarToken validarToken;
+  private final ValidarFormatoTamanho validarFormatoTamanho;
 
   @Override
   public String execute(final String auth, final ProcessamentoRequisicao processamentoRequisicao) {
-    final UsuarioToken usuarioToken = validarToken.executar(auth);
-
-    processamentoRequisicao.enriquecerUsuarioToken(usuarioToken);
+    validarFormatoTamanho.validate(processamentoRequisicao.getVideo());
+    
+    final UsuarioToken usuario = validarToken.executar(auth);
+    
+    processamentoRequisicao.enriquecerUsuarioToken(usuario);
     
     final String idVideo = salvarArquivo.executar(processamentoRequisicao.getVideo(),
         processamentoRequisicao.getIdUsuario());

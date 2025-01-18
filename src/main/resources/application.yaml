@@ -6,6 +6,12 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui-custom.html
+aws:
+  access: ${ACCESS_KEY}
+  secret: ${SECRET_ACCESS_KEY}
+  bucket: ${BUCKET_NAME}
+upload:
+  maxFileSizeMb: ${MAX_FILE_SIZE:1}  
 spring:
   datasource:
     username: ${DATABASE_USERNAME:postgres}
@@ -29,7 +35,7 @@ spring:
     validateMigrationNaming: false
     locations: classpath:db/migration
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka-service:9092}
     consumer:
       group-id: my-consumer-group
       auto-offset-reset: earliest
@@ -38,7 +44,3 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    
-  
-upload:
-  defaultPath: ${DEFAULT_PATH:/home/bridi/Documents}
