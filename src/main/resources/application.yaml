@@ -7,9 +7,11 @@ springdoc:
   swagger-ui:
     path: /swagger-ui-custom.html
 aws:
-  accessKey: ${ACCESS_KEY}
-  secretAccessKey: ${SECRET_ACCESS_KEY}
-  bucketName: ${BUCKET_NAME}
+  accessKey: ${ACCESS_KEY:123}
+  secretAccessKey: ${SECRET_ACCESS_KEY:456}
+  bucketName: ${BUCKET_NAME:fdsadas}
+upload:
+  maxFileSizeMb: ${MAX_FILE_SIZE:1}  
 spring:
   datasource:
     username: ${DATABASE_USERNAME:postgres}

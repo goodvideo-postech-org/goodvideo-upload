@@ -56,4 +56,6 @@ spec:
             secretKeyRef:
               name: db-secret
               key: BUCKET_NAME
+        - name: MAX_FILE_SIZE
+          value: 10
 
