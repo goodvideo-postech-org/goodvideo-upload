@@ -28,14 +28,10 @@ public class ValidarFormatoTamanhoImpl implements ValidarFormatoTamanho {
     if (file.getSize() > getMaxFileSizeInMb()) {
       throw new ValidarArquivoExpcetion(String.format("Tamanho do arquivo excede o permitido: %s Mb.", MAX_FILE_SIZE));
     }
-
   }
 
   private long getMaxFileSizeInMb() {
     return MAX_FILE_SIZE * 1024 * 1024;
   }
-  
-  
-  
 
 }

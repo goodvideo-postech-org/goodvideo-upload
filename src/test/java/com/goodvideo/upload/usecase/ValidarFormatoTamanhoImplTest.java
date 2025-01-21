@@ -3,6 +3,7 @@ package com.goodvideo.upload.usecase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -74,5 +75,33 @@ public class ValidarFormatoTamanhoImplTest {
       assertEquals("Tamanho do arquivo excede o permitido: 0 Mb.", e.getMessage());
     }
   }
-
+  
+  @Test
+  public void validateFizeSizeIsLowerThanFile() throws IOException {
+    ReflectionTestUtils.setField(provider, "MAX_FILE_SIZE", (long) 10);
+    
+    File file = new File("src/test/resources/1mb-example-video-file.mp4");
+    FileInputStream input = new FileInputStream(file);
+    MultipartFile multipartFile = new MockMultipartFile("file",
+                file.getName(), "video/mp4", IOUtils.toByteArray(input));
+    
+    provider.validate(multipartFile);
+  }
+  
+  @Test
+  public void validateContentType() throws IOException {
+    ReflectionTestUtils.setField(provider, "MAX_FILE_SIZE", (long) 10);
+    
+    File file = new File("src/test/resources/1mb-example-video-file.mp4");
+    FileInputStream input = new FileInputStream(file);
+    MultipartFile multipartFile = new MockMultipartFile("file",
+                file.getName(), null, IOUtils.toByteArray(input));
+    
+    try {
+      provider.validate(multipartFile);
+    } catch (ValidarArquivoExpcetion e) {
+      assertEquals("Somente arquivos MP4 são suportados.", e.getMessage());
+    }
+  }
+  
 }

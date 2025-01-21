@@ -1,7 +1,6 @@
 package com.goodvideo.upload.usecase;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 import java.io.IOException;
@@ -32,6 +31,10 @@ public class SalvarArquivoImplTest {
   @Mock
   private MultipartFile arquivo;
 
+  @Mock
+  private MultipartFile mockMultipartFile;
+
+
   @Test
   public void deveSalvarArquivo() throws IOException {
     MockMultipartFile firstFile = new MockMultipartFile("data", "filename.txt", "text/plain",
@@ -39,18 +42,30 @@ public class SalvarArquivoImplTest {
     final String idVideo = provider.executar(firstFile, UUID.randomUUID().toString());
     assertNotNull(idVideo);
   }
-//
-//  @Test
-//   void testExecutar_Exception() throws IOException {
-//       // Simulando exceção no método convertMultipartFileToFile
-//      MockMultipartFile firstFile = new MockMultipartFile("data", "filename.txt", "text/plain",
-//        this.getClass().getResourceAsStream("/sample.txt"));
-//
-//       Exception exception = assertThrows(SalvarArquivoException.class, () -> {
-//         when(provider.executar(null, UUID.randomUUID().toString())).thenThrow(new IOException("Falha ao converter arquivo"));
-//       });
-//       
-//       assertEquals("Falha ao converter arquivo", exception.getMessage());
-//   }
+
+  @Test
+  void testConvertMultipartFileToFile_Success() throws IOException {
+    // Mocking the MultipartFile behavior
+    when(mockMultipartFile.getOriginalFilename()).thenReturn("file");
+    when(mockMultipartFile.getInputStream())
+        .thenReturn(this.getClass().getResourceAsStream("/sample.txt"));
+
+    String idVideo = provider.executar(mockMultipartFile, "file.txt");
+
+    assertNotNull(idVideo);
+
+  }
+
+  @Test
+  void testConvertMultipartFileToFile_ThrowsIOException() throws IOException {
+    // Mocking the MultipartFile behavior
+    when(mockMultipartFile.getOriginalFilename()).thenReturn("teste");
+    when(mockMultipartFile.getInputStream()).thenThrow(new IOException("Mocked IOException"));
+
+    // Call the method under test and assert it throws an exception
+    assertThrows(RuntimeException.class, () -> {
+      provider.executar(mockMultipartFile, "");
+    });
+  }
 
 }
