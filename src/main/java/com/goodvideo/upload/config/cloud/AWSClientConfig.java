@@ -13,13 +13,13 @@ import lombok.Getter;
 @Getter
 public class AWSClientConfig {
 
-  @Value("${aws.access}")
+  @Value("${aws.access:123}")
   private String accessKey;
 
-  @Value("${aws.secret}")
+  @Value("${aws.secret:456}")
   private String secretAccessKey;
 
-  @Value("${aws.bucket}")
+  @Value("${aws.bucket:}")
   private String bucketName;
 
   @Bean

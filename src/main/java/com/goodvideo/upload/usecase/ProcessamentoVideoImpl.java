@@ -1,5 +1,6 @@
 package com.goodvideo.upload.usecase;
 
+import java.util.UUID;
 import org.springframework.stereotype.Component;
 import com.goodvideo.upload.domains.Processamento;
 import com.goodvideo.upload.domains.ProcessamentoRequisicao;
@@ -20,7 +21,9 @@ public class ProcessamentoVideoImpl implements ProcessamentoVideo {
   public String execute(final String auth, final ProcessamentoRequisicao processamentoRequisicao) {
     validarFormatoTamanho.validate(processamentoRequisicao.getVideo());
     
-    final UsuarioToken usuario = validarToken.executar(auth);
+//    final UsuarioToken usuario = validarToken.executar(auth);
+    
+    final UsuarioToken usuario = new UsuarioToken(UUID.randomUUID().toString(), "bridi@gmail.com");
     
     processamentoRequisicao.enriquecerUsuarioToken(usuario);
     

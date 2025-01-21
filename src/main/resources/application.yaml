@@ -7,11 +7,11 @@ springdoc:
   swagger-ui:
     path: /swagger-ui-custom.html
 aws:
-  access: ${ACCESS_KEY}
-  secret: ${SECRET_ACCESS_KEY}
-  bucket: ${BUCKET_NAME}
+  access: ${ACCESS_KEY:123}
+  secret: ${SECRET_ACCESS_KEY:456}
+  bucket: ${BUCKET_NAME:bridi}
 upload:
-  maxFileSizeMb: ${MAX_FILE_SIZE:1}  
+  maxFileSizeMb: ${MAX_FILE_SIZE:10}  
 spring:
   datasource:
     username: ${DATABASE_USERNAME:postgres}

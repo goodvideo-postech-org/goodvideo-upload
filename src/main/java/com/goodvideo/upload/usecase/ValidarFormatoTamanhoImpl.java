@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class ValidarFormatoTamanhoImpl implements ValidarFormatoTamanho {
 
-  @Value("${upload.maxFileSizeMb:0.001}")
+  @Value("${upload.maxFileSizeMb:10}")
   private long MAX_FILE_SIZE; // 10MB em bytes
   
   private static final String ALLOWED_CONTENT_TYPE = "video/mp4"; // Tipo MIME para MP4
