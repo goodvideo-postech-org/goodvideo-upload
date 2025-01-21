@@ -31,6 +31,8 @@ public class ProcessamentoVideoImplTest {
   private EnviarParaProcessamento enviarParaProcessamento;
   @Mock
   private ValidarToken validarToken;
+  @Mock
+  private ValidarFormatoTamanho validarFormatoTamanho;
   
   @Test
   public void deveProcessarRequisicao() {
