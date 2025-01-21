@@ -43,7 +43,6 @@ public class ProcessamentoVideoImplTest {
     p.setId(UUID.randomUUID().toString());
     
     UsuarioToken uToken = new UsuarioToken(UUID.randomUUID().toString(), "email@gmail.com");
-    
     when(validarToken.executar(anyString())).thenReturn(uToken);
     when(salvarArquivo.executar(any(), anyString())).thenReturn(UUID.randomUUID().toString());
     when(salvarProcessamento.executar(anyString(), any())).thenReturn(p);

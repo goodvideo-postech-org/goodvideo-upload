@@ -21,9 +21,7 @@ public class ProcessamentoVideoImpl implements ProcessamentoVideo {
   public String execute(final String auth, final ProcessamentoRequisicao processamentoRequisicao) {
     validarFormatoTamanho.validate(processamentoRequisicao.getVideo());
     
-//    final UsuarioToken usuario = validarToken.executar(auth);
-    
-    final UsuarioToken usuario = new UsuarioToken(UUID.randomUUID().toString(), "bridi@gmail.com");
+    final UsuarioToken usuario = validarToken.executar(auth);
     
     processamentoRequisicao.enriquecerUsuarioToken(usuario);
     
