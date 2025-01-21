@@ -15,15 +15,17 @@ spec:
     spec:
       containers:
       - name: goodvideo-upload
-        image: bridicarlos/goodvideo-upload:1.0
+        image: bridicarlos/goodvideo-upload:1.2.7
         ports:
         - containerPort: 80
         resources:
           requests:
-            cpu: "250m"
+            cpu: "280m"
           limits:
             cpu: "500m" 
         env:
+        - name: MAX_FILE_SIZE
+          value: "10"
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -35,16 +37,21 @@ spec:
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: DATABASE_USER
+              key: DATABASE_USERNAME
         - name: DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
               name: db-secret
               key: DATABASE_PASSWORD
-        - name: REDIS_HOST
+        - name: ACCESS_KEY
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: REDIS_HOST
-        - name: REDIS_PORT
-          value: "6379"
+              key: ACCESS_KEY
+        - name: SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: SECRET_ACCESS_KEY
+        - name: BUCKET_NAME
+          value: goodvideo-videos-upload

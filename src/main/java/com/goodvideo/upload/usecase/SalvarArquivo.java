@@ -1,9 +1,10 @@
 package com.goodvideo.upload.usecase;
 
 import java.io.InputStream;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface SalvarArquivo {
 
-  String executar(InputStream arquivo, String idUsuario);
+  String executar(MultipartFile arquivo, String idUsuario);
   
 }

@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.goodvideo.upload.domains.ProcessamentoRequisicao;
-import com.goodvideo.upload.gateways.ProcessamentoMensageriaGateway;
 import com.goodvideo.upload.usecase.ProcessamentoVideo;
-import com.goodvideo.upload.usecase.SalvarArquivo;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -29,12 +26,9 @@ public class ProcessamentoController {
   public ResponseEntity<String> upload(
       @RequestHeader(name = "authorization") String auth,
       @RequestPart("file") MultipartFile file) throws IOException {
-    
-    System.out.println(auth);
-    
     return ResponseEntity.ok(
           processamentoVideo.execute(auth, ProcessamentoRequisicao.builder()
-                .video(file.getInputStream())
+                .video(file)
                 .fileName(file.getOriginalFilename())
                 .email("bridi@bridi.com")
                 .idUsuario(UUID.randomUUID().toString())
