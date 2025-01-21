@@ -22,7 +22,7 @@ public class TokenExceptionTest {
     assertNull(tokenException.getCause());
     
     TokenException tokenExceptionNullpointer = new TokenException("Token exception com nullpointer", new NullPointerException());
-    assertEquals("Erro ao salvar arquivo com nullpointer", tokenExceptionNullpointer.getMessage());
+    assertEquals("Token exception com nullpointer", tokenExceptionNullpointer.getMessage());
     assertTrue(tokenExceptionNullpointer.getCause() instanceof NullPointerException);
   }
   
