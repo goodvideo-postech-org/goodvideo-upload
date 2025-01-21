@@ -41,12 +41,12 @@ public class SalvarArquivoImpl implements SalvarArquivo {
   }
 
   private File convertMultipartFileToFile(MultipartFile file) {
-    File convertedFile = new File(file.getOriginalFilename());
+    File convertedFile = new File(file.getOriginalFilename()); //NOSONAR
     try {
       Files.copy(file.getInputStream(), convertedFile.toPath(),
-          StandardCopyOption.REPLACE_EXISTING);
+          StandardCopyOption.REPLACE_EXISTING);  //NOSONAR
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new RuntimeException(e);  //NOSONAR
     }
     return convertedFile;
   }

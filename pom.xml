@@ -32,7 +32,7 @@
 		<sonar.organization>goodvideo-postech-org</sonar.organization>
   		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
   		<sonar.coverage.exclusions>
-			  **/upload/config/**
+		  **/upload/config/**
 	    </sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
