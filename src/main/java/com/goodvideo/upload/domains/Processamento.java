@@ -18,6 +18,7 @@ public class Processamento {
     private String idUsuario;
     private String email;
     private String diretorio;
+    private String diretorioZip;
     private Status status;
     private LocalDateTime dataCriacao;
 

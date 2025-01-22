@@ -1,7 +1,6 @@
 package com.goodvideo.upload.usecase;
 
 import java.time.LocalDateTime;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.goodvideo.upload.domains.Processamento;
 import com.goodvideo.upload.domains.ProcessamentoRequisicao;
