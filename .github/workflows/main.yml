@@ -97,4 +97,16 @@ jobs:
           sudo mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
 
       - name: Update kubeconfig with EKS cluster info
-        run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name eks-goodvideo-cluster        
+        run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name eks-goodvideo-cluster
+
+      - name: Clonar outro repositório
+        run: git clone git@github.com:goodvideo-postech-org/goodvideo-upload.git  # Aqui você substitui pela URL do repositório que deseja clonar
+  
+      # - name: Acessar pasta do repositório clonado
+      #   run: |
+      #     cd goodvideo-upload/k8s
+  
+      - name: Executar comando dentro da pasta
+        run: |
+          cd goodvideo-upload/k8s  # Novamente, acesse a pasta desejada
+          kubectl apply -f .
