@@ -32,7 +32,7 @@ spring:
     validateMigrationNaming: false
     locations: classpath:db/migration
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka-service:9092}
     consumer:
       group-id: my-consumer-group
       auto-offset-reset: earliest
