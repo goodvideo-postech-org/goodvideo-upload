@@ -40,7 +40,7 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/goodvideo-upload:latest      
   sonar:
-    needs: build  # Runs after the build job finishes successfully
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -70,9 +70,9 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=goodvideo-postech-org_goodvideo-upload
 
   deploy_to_eks:
-    needs: build  # Runs after the build job finishes successfully
+    needs: build 
     runs-on: ubuntu-latest
-
+a4822a5862b0eaabad89bf520491e613cf3f3b43
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
