@@ -72,7 +72,7 @@ jobs:
   deploy_to_eks:
     needs: build 
     runs-on: ubuntu-latest
-a4822a5862b0eaabad89bf520491e613cf3f3b43
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
