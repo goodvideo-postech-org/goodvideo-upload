@@ -7,9 +7,9 @@ springdoc:
   swagger-ui:
     path: /swagger-ui-custom.html
 aws:
-  access: ${ACCESS_KEY:123}
-  secret: ${SECRET_ACCESS_KEY:456}
-  bucket: ${BUCKET_NAME:bridi}
+  access: ${ACCESS_KEY}
+  secret: ${SECRET_ACCESS_KEY}
+  bucket: ${BUCKET_NAME:goodvideo-videos-upload}
 upload:
   maxFileSizeMb: ${MAX_FILE_SIZE:10}  
 spring:
@@ -32,7 +32,7 @@ spring:
     validateMigrationNaming: false
     locations: classpath:db/migration
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka-service:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     consumer:
       group-id: my-consumer-group
       auto-offset-reset: earliest
