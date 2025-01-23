@@ -33,9 +33,7 @@ public class SalvarProcessamentoImplTest {
   private ArgumentCaptor<Processamento> processamentoCapture;
   
   @Test
-  public void deveSalvarProcessamento() throws IOException {
-
-    
+  public void deveSalvarProcessamento() throws IOException {    
     MockMultipartFile firstFile = new MockMultipartFile("data", "filename.txt", "text/plain",
         this.getClass().getResourceAsStream("/sample.txt"));
     
@@ -45,7 +43,7 @@ public class SalvarProcessamentoImplTest {
     final ProcessamentoRequisicao p = new ProcessamentoRequisicao(firstFile, "sample.txt", uuidUsuario, emailUsuario);
     final String idVideo = UUID.randomUUID().toString();
     final Processamento executar = provider.executar(idVideo, p);
-    final String diretorio = String.format("%s/%s.mp4", uuidUsuario, idVideo);
+    final String diretorio = String.format("%s/%s/%s", uuidUsuario, idVideo, p.getFileName());
     
     verify(processamentoDatabaseGateway).salvar(processamentoCapture.capture());
     

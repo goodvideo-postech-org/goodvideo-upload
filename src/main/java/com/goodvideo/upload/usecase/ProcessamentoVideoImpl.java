@@ -1,5 +1,6 @@
 package com.goodvideo.upload.usecase;
 
+import java.util.UUID;
 import org.springframework.stereotype.Component;
 import com.goodvideo.upload.domains.Processamento;
 import com.goodvideo.upload.domains.ProcessamentoRequisicao;

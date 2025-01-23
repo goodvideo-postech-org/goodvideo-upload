@@ -22,7 +22,7 @@ public class SalvarProcessamentoImpl implements SalvarProcessamento {
     processamento.setStatus(Status.PROCESSANDO);
     processamento.setIdUsuario(processamentoRequisicao.getIdUsuario());
     processamento.setEmail(processamentoRequisicao.getEmail());
-    processamento.setDiretorio(String.format("%s/%s.mp4", processamentoRequisicao.getIdUsuario(), idVideo));
+    processamento.setDiretorio(String.format("%s/%s/%s", processamentoRequisicao.getIdUsuario(), idVideo, processamentoRequisicao.getFileName()));
     processamento.setDataCriacao(LocalDateTime.now());
     return processamentoDatabaseGateway.salvar(processamento);
   }
