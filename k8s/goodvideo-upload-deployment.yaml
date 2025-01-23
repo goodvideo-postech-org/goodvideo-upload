@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: goodvideo-upload
-        image: bridicarlos/goodvideo-upload:1.2.7
+        image: bridicarlos/goodvideo-upload:latest
         ports:
         - containerPort: 80
         resources:
