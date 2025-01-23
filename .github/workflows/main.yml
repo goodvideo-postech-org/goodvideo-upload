@@ -100,7 +100,7 @@ jobs:
         run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name eks-goodvideo-cluster
 
       - name: Clonar outro repositório
-        run: git clone git@github.com:goodvideo-postech-org/goodvideo-upload.git  # Aqui você substitui pela URL do repositório que deseja clonar
+        run: git clone https://github.com/goodvideo-postech-org/goodvideo-upload.git  # Aqui você substitui pela URL do repositório que deseja clonar
   
       # - name: Acessar pasta do repositório clonado
       #   run: |
