@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-goodvideo-kafka-loadbalancer
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 9092
+      targetPort: 9092
+      nodePort: 32001
+  selector:
+    app: kafka
