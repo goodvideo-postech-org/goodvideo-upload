@@ -36,9 +36,9 @@ public class EnviarEmailImpl implements EnviarEmail {
 
       sesClient.sendEmail(request);
     } catch (AmazonServiceException e) {
-      e.printStackTrace();
+      System.err.println("Ocorreu SES para envio do email: " + e.getMessage());
     } catch (Exception e) {
-      e.printStackTrace();
+      System.err.println("Ocorreu genérico para envio do email: " + e.getMessage());
     }
   }
 
