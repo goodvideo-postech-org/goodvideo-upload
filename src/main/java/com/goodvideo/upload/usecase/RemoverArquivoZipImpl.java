@@ -27,7 +27,7 @@ public class RemoverArquivoZipImpl implements RemoverArquivosZip {
   @Override
   public void remover() {
     
-    final List<Processamento> obterProcessamentosDataLimite = processamentoDatabaseGateway.obterProcessamentosDataLimite(LocalDateTime.now().minusDays(1));
+    final List<Processamento> obterProcessamentosDataLimite = processamentoDatabaseGateway.obterProcessamentosDataLimite(LocalDateTime.now().minusMinutes(10));
 
     obterProcessamentosDataLimite.stream().forEach(processamento -> {
       amazonS3.deleteObject(new DeleteObjectRequest(bucketName, String.format("%s/%s/frames.zip", processamento.getIdUsuario(), processamento.getId())));

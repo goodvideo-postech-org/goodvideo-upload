@@ -27,7 +27,7 @@ public class ProcessamentoDatabaseGatewayImpl implements ProcessamentoDatabaseGa
 
   @Override
   public List<Processamento> obterProcessamentosPorIdUsuario(String idUsuario) {
-    return CollectionUtils.emptyIfNull(processamentoRepository.getByIdUsuarioAndStatusNot(idUsuario, Status.EXPIRADO.toString())).stream()
+    return CollectionUtils.emptyIfNull(processamentoRepository.getByIdUsuarioAndStatusNot(idUsuario, Status.EXPIRADO)).stream()
         .map(ProcessamentoEntity::toDomain).collect(Collectors.toList());
   }
 
