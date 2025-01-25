@@ -36,7 +36,7 @@
 			**/response/**,
 			**/database/**,
 			**/gateways/api/**,
-			**/com/goodvideo/upload/usecase/EnviarEmail.java
+			**/upload/usecase/EnviarEmailImpl.java
 		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
