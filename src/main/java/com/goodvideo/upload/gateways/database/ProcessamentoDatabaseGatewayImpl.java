@@ -1,6 +1,7 @@
 package com.goodvideo.upload.gateways.database;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
@@ -30,7 +31,14 @@ public class ProcessamentoDatabaseGatewayImpl implements ProcessamentoDatabaseGa
 
   @Override
   public Processamento obterPorId(String idProcessamento) {
-    return processamentoRepository.findById(UUID.fromString(idProcessamento)).get().toDomain();
+    Optional<ProcessamentoEntity> byId =
+        processamentoRepository.findById(UUID.fromString(idProcessamento));
+
+    if (byId.isPresent()) {
+      return byId.get().toDomain();
+    }
+    return null;
+
   }
 
 }
