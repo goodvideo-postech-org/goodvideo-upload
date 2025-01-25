@@ -14,7 +14,7 @@ public class ProcessamentoStatus implements Serializable {
 
   private static final long serialVersionUID = 5674549495425097318L;
   private String idVideo;
-  private String diretorio;
+  private String diretorioZip;
   private String status;
   
 }

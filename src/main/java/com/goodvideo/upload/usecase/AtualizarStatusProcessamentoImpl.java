@@ -1,8 +1,6 @@
 package com.goodvideo.upload.usecase;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.goodvideo.upload.domains.Processamento;
@@ -26,7 +24,7 @@ public class AtualizarStatusProcessamentoImpl implements AtualizarStatusProcessa
     final Processamento processamento = processamentoDatabaseGateway.obterPorId(processamentoStatus.getIdVideo());
 
     processamento.setStatus(Status.getByString(processamentoStatus.getStatus()));
-    processamento.setDiretorioZip(String.format("%s/%s", baseUrl, processamentoStatus.getDiretorio()));
+    processamento.setDiretorioZip(String.format("%s/%s", baseUrl, processamentoStatus.getDiretorioZip()));
     processamento.setDataModificacao(LocalDateTime.now());
     
     processamentoDatabaseGateway.salvar(processamento);

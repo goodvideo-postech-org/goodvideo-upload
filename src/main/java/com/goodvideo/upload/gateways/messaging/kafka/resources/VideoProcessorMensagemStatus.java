@@ -16,13 +16,13 @@ public class VideoProcessorMensagemStatus implements Serializable {
   
   private String idVideo;
   private String status;
-  private String diretorio;
+  private String diretorioZip;
   
   public ProcessamentoStatus toDomain() {
     return ProcessamentoStatus.builder()
       .idVideo(this.idVideo)
       .status(this.status)
-      .diretorio(diretorio)
+      .diretorioZip(diretorioZip)
     .build();
   }
 
