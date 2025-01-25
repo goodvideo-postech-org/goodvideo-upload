@@ -2,6 +2,7 @@ package com.goodvideo.upload.usecase;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
 import com.amazonaws.services.simpleemail.model.Body;
@@ -21,18 +22,24 @@ public class EnviarEmailImpl implements EnviarEmail {
     final String subject = "Falha ao processar imagens";
     final String bodyText = "Olá!\n\nHouve uma falha ao obter as imagens do vídeo";
 
-    AmazonSimpleEmailService sesClient = AmazonSimpleEmailServiceClientBuilder.standard().build();
+    try {
+      AmazonSimpleEmailService sesClient = AmazonSimpleEmailServiceClientBuilder.standard().build();
 
-    Content subjectContent = new Content().withData(subject);
-    Content bodyContent = new Content().withData(String.format("%s. IdProcessamento: %s", bodyText, idVideo));
-    Body body = new Body().withText(bodyContent);
+      Content subjectContent = new Content().withData(subject);
+      Content bodyContent = new Content().withData(String.format("%s. IdProcessamento: %s", bodyText, idVideo));
+      Body body = new Body().withText(bodyContent);
 
-    Message message = new Message().withSubject(subjectContent).withBody(body);
+      Message message = new Message().withSubject(subjectContent).withBody(body);
 
-    SendEmailRequest request = new SendEmailRequest().withSource(email)
-        .withDestination(new Destination().withToAddresses(emailUsuario)).withMessage(message);
+      SendEmailRequest request = new SendEmailRequest().withSource(email)
+          .withDestination(new Destination().withToAddresses(emailUsuario)).withMessage(message);
 
-    sesClient.sendEmail(request);
+      sesClient.sendEmail(request);
+    } catch (AmazonServiceException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 }
