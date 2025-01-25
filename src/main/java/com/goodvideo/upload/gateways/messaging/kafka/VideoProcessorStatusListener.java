@@ -14,16 +14,10 @@ public class VideoProcessorStatusListener {
   private final AtualizarStatusProcessamento atualizarStatusProcessamento;
   
   @KafkaListener(topics = {"com.goodvideo.upload.finalizar_processamento.v1"})
-  public void getMessage(String message) {
-    
+  public void ler(String message) {
     final VideoProcessorMensagemStatus videoProcessamento = new Gson().fromJson(message, VideoProcessorMensagemStatus.class);
     
-    try {
-      atualizarStatusProcessamento.atualizar(videoProcessamento.toDomain());
-    }catch(Exception e) {
-      System.err.println("Erro ao atualizar status.");
-    }
-
+    atualizarStatusProcessamento.atualizar(videoProcessamento.toDomain());
   }
   
 }
