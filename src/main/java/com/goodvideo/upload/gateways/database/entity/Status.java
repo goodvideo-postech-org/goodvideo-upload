@@ -9,7 +9,7 @@ public enum Status {
     CONCLUIDO,
     ERRO;
 
-    public Status getByString(final String status){
+    public static Status getByString(final String status){
         return Status.valueOf(status);
     }
 

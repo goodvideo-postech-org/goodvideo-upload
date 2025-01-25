@@ -1,6 +1,7 @@
 package com.goodvideo.upload.gateways.database;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,11 @@ public class ProcessamentoDatabaseGatewayImpl implements ProcessamentoDatabaseGa
   public List<Processamento> obterProcessamentosPorIdUsuario(String idUsuario) {
     return CollectionUtils.emptyIfNull(processamentoRepository.getByIdUsuario(idUsuario)).stream()
         .map(ProcessamentoEntity::toDomain).collect(Collectors.toList());
+  }
+
+  @Override
+  public Processamento obterPorId(String idProcessamento) {
+    return processamentoRepository.findById(UUID.fromString(idProcessamento)).get().toDomain();
   }
 
 }

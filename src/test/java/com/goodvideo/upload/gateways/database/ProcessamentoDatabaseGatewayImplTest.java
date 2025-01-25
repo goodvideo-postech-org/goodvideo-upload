@@ -32,7 +32,7 @@ public class ProcessamentoDatabaseGatewayImplTest {
     String diretorio = "/path/dir/video.mp4";
     String diretorioZip = "/path/dir/video.zip";
     
-    final ProcessamentoEntity processamentoEntity = new ProcessamentoEntity(id, idUsuario, email, diretorio, diretorioZip, Status.PROCESSANDO, LocalDateTime.now());
+    final ProcessamentoEntity processamentoEntity = new ProcessamentoEntity(id, idUsuario, email, diretorio, diretorioZip, Status.PROCESSANDO, LocalDateTime.now(), LocalDateTime.now());
     
     when(processamentoRepository.getByIdUsuario(idUsuario)).thenReturn(List.of(processamentoEntity));
     

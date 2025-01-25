@@ -45,7 +45,7 @@ public class ProcessamentoEntityTest {
     String diretorio = "/path/dir/video.mp4";
     String diretorioZip = "/path/dir/video.zip";
     
-    final ProcessamentoEntity processamentoEntity = new ProcessamentoEntity(id, idUsuario, email, diretorio, diretorioZip, Status.PROCESSANDO, LocalDateTime.now());
+    final ProcessamentoEntity processamentoEntity = new ProcessamentoEntity(id, idUsuario, email, diretorio, diretorioZip, Status.PROCESSANDO, LocalDateTime.now(), LocalDateTime.now());
     Processamento domain = processamentoEntity.toDomain();
     assertEquals(domain.getEmail(), email);
     assertEquals(domain.getDiretorio(), diretorio);
