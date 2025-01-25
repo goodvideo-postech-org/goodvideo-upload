@@ -7,7 +7,8 @@ public enum Status {
 
     PROCESSANDO,
     CONCLUIDO,
-    ERRO;
+    ERRO,
+    EXPIRADO;
 
     public static Status getByString(final String status){
         return Status.valueOf(status);

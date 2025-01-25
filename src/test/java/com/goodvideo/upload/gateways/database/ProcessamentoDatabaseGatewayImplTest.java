@@ -39,7 +39,7 @@ public class ProcessamentoDatabaseGatewayImplTest {
     
     final ProcessamentoEntity processamentoEntity = new ProcessamentoEntity(id, idUsuario, email, diretorio, diretorioZip, Status.PROCESSANDO, LocalDateTime.now(), LocalDateTime.now());
     
-    when(processamentoRepository.getByIdUsuario(idUsuario)).thenReturn(List.of(processamentoEntity));
+    when(processamentoRepository.getByIdUsuarioAndStatusNot(idUsuario, Status.EXPIRADO.toString())).thenReturn(List.of(processamentoEntity));
     
     List<Processamento> obterProcessamentosPorIdUsuario = provider.obterProcessamentosPorIdUsuario(idUsuario);
     
