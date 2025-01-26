@@ -24,6 +24,7 @@ public class ProcessamentoEntity {
   @Enumerated(EnumType.STRING)
   private Status status;
   private LocalDateTime dataCriacao;
+  private LocalDateTime dataModificacao;
 
   public ProcessamentoEntity(final Processamento processamento) {
     id = UUID.fromString(processamento.getId());
@@ -33,11 +34,13 @@ public class ProcessamentoEntity {
     diretorio = processamento.getDiretorio();
     diretorioZip = processamento.getDiretorioZip();
     dataCriacao = processamento.getDataCriacao();
+    dataModificacao = processamento.getDataModificacao();
   }
 
   public Processamento toDomain() {
     return Processamento.builder().id(id.toString()).idUsuario(idUsuario).email(email)
         .diretorio(diretorio).diretorioZip(diretorioZip).status(status).dataCriacao(dataCriacao)
+        .dataModificacao(dataModificacao)
         .build();
   }
 

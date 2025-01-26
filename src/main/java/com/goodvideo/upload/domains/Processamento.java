@@ -21,5 +21,6 @@ public class Processamento {
     private String diretorioZip;
     private Status status;
     private LocalDateTime dataCriacao;
+    private LocalDateTime dataModificacao;
 
 }

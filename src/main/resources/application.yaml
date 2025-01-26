@@ -11,7 +11,9 @@ aws:
   secret: ${SECRET_ACCESS_KEY}
   bucket: ${BUCKET_NAME:goodvideo-videos-upload}
 upload:
-  maxFileSizeMb: ${MAX_FILE_SIZE:10}  
+  maxFileSizeMb: ${MAX_FILE_SIZE:10}
+  baseUrl: https://goodvideo-videos-upload.s3.us-east-1.amazonaws.com
+  email: goodvideofiap@gmail.com  
 spring:
   datasource:
     username: ${DATABASE_USERNAME:postgres}

@@ -1,6 +1,7 @@
 package com.goodvideo.upload.usecase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,7 +23,15 @@ public class ValidarTokenImplTest {
     
     assertEquals("05bed058-8f82-48df-9d96-65897ff6e3ed", executar.getId());
     assertEquals("email@gmail.com", executar.getEmail());
-        
+  }
+  
+  @Test
+  public void deveValidarExcecao() {
+    // Simular um token JWT inválido
+    String token = "Bearer invalid-jwt-token";
+
+    // Testar que o método lança uma exceção quando o token é inválido
+    assertThrows(TokenException.class, () -> provider.executar(token));
   }
 
 }
